@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div id="sidebar">
+    <div class="profile-wrapper">
+        <div class="titles">
+            <h6>Finance Manager</h6>
+            <span class="text-muted">@User.Identity.Name</span>
+        </div>
+    </div>
+    <div class="menu-items">
+        <div class="menu-item">
+            <a href="/">Dashboard</a>
+        </div>
+        <div class="menu-item">
+            <a href="/Category">Categories</a>
+        </div>
+        <div class="menu-item">
+            <a href="/Transaction">Transactions</a>
+        </div>
+        <hr />
+        <div class="menu-item">
+            <a href="/Report">Reports</a>
+        </div>
+        <div class="menu-item">
+            <a href="/Report/SavedReports">Saved Reports</a>
+        </div>
+        <div class="menu-item">
+            <a href="/Group">Groups</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,458 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  font-family: "Inter";
+}
+
+*:not(.fa-solid):not(.fa):not(.e-icons){
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: #12161d;
+  color: white;
+}
+
+}
+.e-bigger {
+    font-size: x-small;
+}
+.main-content {
+    margin-left: 290px; /*290*/
+}
+
+/*breadcrumb*/
+.e-breadcrumb a, .e-breadcrumb a:hover {
+    text-decoration: none !important;
+    color: inherit !important
+}
+
+/*Button*/
+.btn:focus, .btn:active{
+    outline: none !important;
+    box-shadow: none;
+}
+.no-a-decoration, .no-a-decoration:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.e-grid {
+    border: 0;
+    border-radius: 5px;
+}
+
+    .e-grid .e-gridcontent, .e-grid .e-table {
+        background-color: #1a222b;
+    }
+
+    .e-grid .e-gridheader {
+        border: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding: 10px;
+        background-color: #222b33;
+    }
+
+        .e-grid .e-gridheader .e-headercell {
+            background-color: #222b33;
+        }
+
+    .e-grid .e-gridpager {
+        background-color: #1a222b;
+    }
+
+    .e-grid .e-pagercontainer {
+        border: none;
+        background-color: #1a222b;
+    }
+
+    .e-grid .e-content table {
+        padding: 0px 10px;
+    }
+
+.e-pagercontainer .e-icons {
+    background-color: #1a222b;
+    border: none !important;
+}
+
+.e-pager .e-numericitem {
+    color: #adb5bd;
+    background-color: #1a222b;
+    padding: 15px !important;
+}
+
+    .e-pager .e-numericitem:not(.e-currentitem) {
+        border: none !important;
+    }
+
+    .e-pager .e-numericitem:hover {
+        color: #fff;
+    }
+
+    .e-pager .e-numericitem.e-currentitem {
+        color: #fff;
+        border: none !important;
+        background-color: #31373d;
+    }
+
+.e-pager div.e-icons:not(.e-disable) {
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.e-grid .e-pager {
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/*Menu*/
+#menu {
+    width: 100% !important;
+    background-color: inherit;
+    overflow: hidden;
+}
+
+    #menu .e-menu-item:not(.e-separator) {
+        height: 50px;
+        border-radius: 4px;
+    }
+
+    #menu .e-menu-item {
+        box-sizing: border-box;
+    }
+
+        #menu .e-menu-item a {
+            width: 100%;
+            color: rgb(171, 163, 152);
+            font-weight: 300;
+            padding: 7px 5px;
+            box-sizing: border-box;
+        }
+
+    #menu .e-anchor-wrap {
+        display: inline-block;
+    }
+
+    #menu .e-menu-item .e-anchor-wrap span.e-menu-icon {
+        color: rgb(171, 163, 152);
+    }
+
+    #menu .e-menu-item.e-separator {
+        border: none;
+        margin: 5px 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 13px;
+        color: #65da41;
+    }
+
+        #menu .e-menu-item.e-separator:not(:first-child) {
+            margin-top: 35px;
+        }
+
+
+/*Navbar*/
+
+nav.navbar {
+    background-color: rgba(18, 22, 29);
+}
+
+    nav.navbar i {
+        padding: 10px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+        nav.navbar i:hover, nav.navbar img:hover {
+            cursor: pointer;
+            background-color: #48545f14;
+            transform: scale(1.05) translateZ(0px);
+        }
+
+nav.navbar {
+    margin-left: 290px;
+}
+
+/*Navbar prifuke pic*/
+.navbar .dropdown-menu {
+    background-color: #12161d;
+    top: 100%;
+    left: auto;
+    right: 0;
+}
+
+.profile-picc {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
+}
+/*Тоже навбар*/
+.custom-btn-dropdown {
+    color: #fff;
+    background-color: #12161d;
+}
+.custom-btn-dropdown:hover {
+    background-color: #12161d;
+    background-color: #48545f14;
+    transform: scale(1.05) translateZ(0px);
+}
+.custom-dropdown {
+    color: #fff;
+    border: 1px solid #6c757d;
+}
+.custom-dropdown-item {
+    color: #fff;
+    background-color: #12161d;
+}
+.custom-dropdown-item:hover {
+    color: #fff;
+    background-color: #222b33;
+}
+
+/*Radio Button Group*/
+input[type="radio"] {
+    position: absolute;
+    appearance: none; /* Removes default styling */
+}
+.e-btn-group.custom-rbt-group {
+    width: 100%;
+}
+
+.e-btn-group.custom-rbt-group .e-btn {
+    width: 49%;
+}
+
+.custom-rbt-group label.e-btn {
+    padding: 10px 10px 10px 10px;
+    box-shadow: none !important;
+    background-color: rgb(34 43 51);
+    color: #fff;
+}
+
+.e-btn-group.custom-rbt-group input:checked + label.e-btn {
+    background-color: #12161d;
+    color: white;
+}
+
+/*Sidebar*/
+#sidebar {
+    width: 290px;
+    height: 100vh;
+    background-color: #12161d;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    border-right: 1px dashed rgba(75, 82, 85, 0.24);
+}
+
+img.profile-pic {
+    margin-right: 15px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(72, 84, 95, 0.12);
+    padding: 16px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+    .profile-wrapper .titles {
+        line-height: 1;
+    }
+
+.titles {
+    display: flex;
+    flex-direction: column;
+}
+
+    .titles h6 {
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+    .titles .text-muted {
+        font-size: 14px;
+    }
+
+.menu-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.menu-item {
+    border-radius: 12px;
+    padding: 10px;
+}
+    .menu-item:hover {
+        background-color: rgba(72, 84, 95, 0.12);
+        text-decoration: underline;
+    }
+
+
+/*Таблицы*/
+
+.custom-table {
+    font-size: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .custom-table th,
+    .custom-table td {
+        border: none;
+        padding: 10px 15px;
+        text-align: left;
+    }
+    .custom-table th {
+        padding: 20px 15px;
+        text-align: left;
+    }
+
+    .custom-table thead {
+        padding: 5px;
+        color: #fff;
+        background-color: #222b33;
+        border: none;
+    }
+
+    .custom-table tbody tr {
+        border-bottom: 1px solid #3c3c3c;
+        background-color: #1a222b;
+    }
+        .custom-table tbody tr:hover {
+            background-color: #222b33;
+        }
+
+    .custom-table td {
+        color: #fff;
+    }
+
+    .custom-table .text-end {
+        text-align: right;
+    }
+
+
+/*Виджет*/
+
+.widget {
+    border-radius: 1rem;
+    background-color: #1a222b; 
+}
+    .widget.summary > div:first-child {
+        padding: 1rem;
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }y
+        .widget.summary > div:first-child {
+            font-weight: bold;
+        }
+
+    .widget.chart {
+        padding: 5px;
+    }
+
+
+/*Login logout*/
+
+.login-logout-card .card-header {
+    padding: 0px 0px 12px 0px;
+}
+
+.login-logout-card ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
+}
+
+.login-logout-card li.nav-item {
+    width: 50%;
+}
+
+.login-logout-card a.nav-link {
+    background-color: #12161d;
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+.login-logout-card a.nav-link.active {
+    border: none;
+    background-color: #222b33;
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+.login-logout-card .card-body {
+    padding: 10px 20px;
+}
+
+.custom-input {
+    background-color: #1a222b;
+    color: #fff;
+    border-radius: .3rem;
+    border: none;
+    padding: 10px; /* Consistent padding */
+}
+
+    .custom-input::placeholder {
+        color: #6c757d;
+        opacity: 1;
+    }
+
+    .custom-input:focus::placeholder {
+        color: #6c757d;
+        opacity: 1;
+    }
+
+    .custom-input:focus {
+        color: #fff;
+        background-color: #1a222b;
+        border: none;
+        outline: none;
+        box-shadow: none; /* Removes the default focus shadow */
+        padding: 10px !important; /* Consistent padding */
+    }
+
+    .custom-input::-webkit-input-placeholder {
+        color: #6c757d;
+    }
+
+    .custom-input:not(:focus)::placeholder {
+        color: #6c757d;
+        opacity: 1;
+    }
+
+
+
+

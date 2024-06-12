@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CourseWork.Models.Category>
+
+@{
+    ViewData["PageTitle"] = "Categories";
+    ViewData["PageActionText"] = "+ New Category";
+    ViewData["PageActionUrl"] = "/Category/AddOrEdit";
+}
+<div class="row">
+    <div class="col-md-7">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.TitleWithIcon</td>
+                        <td>
+                            @if (category.Type == "Income")
+                            {
+                                <span class="badge bg-success">@category.Type</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">@category.Type</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row justify-content-start">
+                                <a class="btn btn-sm no-a-decoration" href="/Category/AddOrEdit/@category.CategoryId">
+                                    <i class="fa-solid fa-pen fa-lg"></i>
+                                </a>
+                                <form action="/Category/Delete/@category.CategoryId" method="post" class="ms-2">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-link no-a-decoration" onclick="return confirm('Are you sure to delete?')">
+                                        <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script id="typeColumnTemplate" type="text/x-template">
+    ${if(Type == "Income")}
+        <span class="badge bg-success">${Type}</span>
+    ${else}
+        <span class="badge bg-danger">${Type}</span>
+    ${/if}
+</script>
+<script id="actionColumnTemplate" type="text/x-template">
+    <div class="d-flex flex-row justify-content-start">
+        <a class="btn btn-sm no-a-decoration" href="/Category/AddOrEdit/${CategoryId}">
+            <i class="fa-solid fa-pen fa-lg"></i>     
+        </a>
+        <form action="/Category/Delete/${CategoryId}" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-sm btn-link no-a-decoration" onclick="return confirm(&quot;Are you sure to delete?&quot;)">
+                <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+            </button>
+        </form>
+    </div>
+</script>

@@ -1,0 +1,64 @@
+﻿@model CourseWork.Models.Group
+
+<h2>Add User to Group: @Model.GroupName</h2>
+
+<div class="group-info">
+    <h4>Group Information</h4>
+    <p><strong>ID:</strong> @Model.GroupId</p>
+    <p><strong>Name:</strong> @Model.GroupName</p>
+    <p><strong>Balance:</strong> @Model.Balance.ToString("N0") ₸</p>
+</div>
+
+<div class="existing-users">
+    <h4>Existing Users in Group</h4>
+    @if (Model.Users != null && Model.Users.Any())
+    {
+        <ul class="list-group">
+            @foreach (var user in Model.Users)
+            {
+                <li class="list-group-item">
+                    @user.UserName (@user.Email)
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No users in this group.</p>
+    }
+</div>
+
+<form asp-action="AddUserToGroup" asp-route-id="@Model.GroupId">
+    <div class="form-group">
+        <label for="userId">Select User:</label>
+        <select class="form-control" name="userId">
+            @foreach (var user in ViewBag.UsersNotInGroup)
+            {
+                <option value="@user.Value">@user.Text</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add User</button>
+</form>
+<style>
+    .group-info, .existing-users {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-top: 20px;
+    }
+
+    .btn-primary {
+        margin-top: 10px;
+    }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>

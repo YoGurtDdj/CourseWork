@@ -1,0 +1,167 @@
+﻿@model CourseWork.Models.ReportViewModel
+
+@{
+    ViewData["Title"] = "Отчеты";
+}
+<h3>Отчеты</h3>
+
+<style>
+    /* report.css */
+
+    .custom-dropdown-item {
+        color: #fff;
+        background-color: #12161d;
+    }
+
+        .custom-dropdown-item:hover {
+            color: #fff;
+            background-color: #222b33;
+        }
+    .report-form {
+        margin: 20px 0;
+    }
+
+        .report-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .report-form label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .report-form .dropdown {
+            font-size: 16px;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .report-form .btn {
+            margin-top: 10px;
+        }
+
+    .report-summary {
+        margin-top: 30px;
+    }
+
+        .report-summary h3, .report-summary h4 {
+            margin-top: 20px;
+        }
+
+        .report-summary p {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+
+    #reportType {
+        background-color: #1a222b;
+        color: white;
+        border: none;
+    }
+</style>
+
+<form method="post" asp-action="GenerateReport" class="report-form">
+    <div class="form-group">
+        <label for="reportType">Выберите тип отчета:</label>
+        <select class="dropdown" id="reportType" name="reportType">
+            <option class="dropdown-item custom-dropdown-item" value="daily">Ежедневный отчет</option>
+            <option class="dropdown-item custom-dropdown-item" value="monthly">Ежемесячный отчет</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Сгенерировать отчет</button>
+</form>
+
+@if (Model != null)
+{
+    <div class="report-summary">
+        <h3 class="mb-5">Отчет с @Model.StartDate.ToShortDateString() по @Model.EndDate.ToShortDateString():</h3>
+        <div class="col-md-8 align-items-center">
+            <div class="row">
+                <div class="col-md-8 mb-4">
+                    <div class="d-flex flex-row widget summary income">
+                        <div class="d-flex flex-column m-auto py-3">
+                            <span class="lead fw-bold">Общие доходы:</span>
+                        </div>
+                        <div class="d-flex flex-column m-auto py-3">
+                            <h1 class="display-6 fw-bold m-0">@Model.TotalIncome.ToString("N0") ₸</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 mb-4">
+                    <div class="d-flex flex-row widget summary expense">
+                        <div class="d-flex flex-column m-auto py-3">
+                            <span class="lead fw-bold">Общие расходы:</span>
+                        </div>
+                        <div class="d-flex flex-column m-auto py-3">
+                            <h1 class="display-6 fw-bold m-0">@Model.TotalExpense.ToString("N0") ₸</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 mb-4">
+                    <div class="d-flex flex-row widget summary balance">
+                        <div class="d-flex flex-column m-auto py-3">
+                            <span class="lead fw-bold">Общий баланс:</span>
+                        </div>
+                        <div class="d-flex flex-column m-auto py-3">
+                            <h1 class="display-6 fw-bold m-0">@Model.Balance.ToString("N0") ₸</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.PeriodInfo))
+        {
+            <p>Период: @Model.PeriodInfo</p>
+        }
+
+        @if (Model.DailySummaries != null)
+        {
+            <div class="widget mb-3">
+                <div class="p-4">
+                    <h4 class="fw-bold">Ежедневные сводки</h4>
+                </div>
+                <div class="px-4 pb-4">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Доход</th>
+                                <th>Расход</th>
+                                <th>Баланс</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var summary in Model.DailySummaries)
+                            {
+                                <tr>
+                                    <td>@summary.Date.ToShortDateString()</td>
+                                    <td>@summary.TotalIncome.ToString("N0") ₸</td>
+                                    <td>@summary.TotalExpense.ToString("N0") ₸</td>
+                                    <td>@summary.Balance.ToString("N0") ₸</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+
+        <form method="post" asp-action="SaveReport">
+            <input type="hidden" name="UserId" value="@Model.UserId" />
+            <input type="hidden" name="StartDate" value="@Model.StartDate" />
+            <input type="hidden" name="EndDate" value="@Model.EndDate" />
+            <input type="hidden" name="TotalIncome" value="@Model.TotalIncome" />
+            <input type="hidden" name="TotalExpense" value="@Model.TotalExpense" />
+            <input type="hidden" name="Balance" value="@Model.Balance" />
+            <input type="hidden" name="ReportType" value="@Model.ReportType" />
+            <button type="submit" class="btn btn-success">Сохранить отчет</button>
+        </form>
+    </div>
+}
+

@@ -1,0 +1,42 @@
+﻿@model CourseWork.Models.Transaction
+
+@{
+    ViewData["PageTitle"] = Model.TransactionId == 0 ? "Create a new transacrion" : "Edit transacrion";
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5">
+            <form asp-action="AddOrEdit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="TransactionId" />
+                <div class="mb-3">
+                    <label for="date" class="mb-2">Date</label>
+                    <input type="date" id="date" asp-for="Date" class="form-control custom-input" style="background-color: #12161d;" placeholder="Date" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="ddlCategory" class="mb-2">Category</label>
+                    <select id="ddlCategory" asp-for="CategoryId" class="form-control" style="background-color: #12161d; color: white; box-shadow: none;border:none;" asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "TitleWithIcon"))">
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger fs-6"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="mb-2">Amount</label>
+                    <input type="number" id="amount" asp-for="Amount" class="form-control custom-input" style="background-color: #12161d;" min="0" placeholder="Amount" />
+                    <span asp-validation-for="Amount" class="text-danger fs-6"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="note" class="mb-2">Note</label>
+                    <textarea id="note" asp-for="Note" class="form-control custom-input" style="background-color: #12161d;" placeholder="Note" rows="3"></textarea>
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+

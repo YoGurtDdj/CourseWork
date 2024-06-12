@@ -1,0 +1,45 @@
+﻿@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center">
+	<div class="col-5 mt-5">
+		<div class="card login-logout-card" style="border: none;">
+			<div class="card-header" style="background-color: #12161d;">
+				<ul class="nav nav-tabs card-header-tabs" style="background-color: #12161d;">
+					<li class="nav-item">
+						<a class="nav-link border-0" href="/Identity/Account/Login" style="border-radius: 5px 0px 0 0;">
+							Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link border-0" href="/Identity/Account/Register" style="border-radius: 0px 5px 0 0;">
+							Register
+						</a>
+					</li>
+				</ul> 
+			</div>
+			<div class="card-body" style="background-color: #222b33; border: none;">
+				<div class="row justify-content-center">
+					<div class="col-10 my-4">
+						@RenderBody()
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	@await RenderSectionAsync("Scripts", required: false)
+	<script>
+		$(function () {
+			const currentPage = location.pathname;
+			$('.nav-tabs li a').each(function () {
+				const $this = $(this);
+				if (currentPage.toLowerCase().indexOf($this.attr('href').toLowerCase()) !== -1) {
+					$this.addClass('active');
+				}
+			})
+		})
+	</script>
+}

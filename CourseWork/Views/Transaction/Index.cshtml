@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CourseWork.Models.Transaction>
+
+@{
+    ViewData["PageTitle"] = "Transaction";
+    ViewData["PageActionText"] = "+ New Transaction";
+    ViewData["PageActionUrl"] = "/Transaction/AddOrEdit";
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transaction in Model)
+                {
+                    <tr>
+                        <td>@transaction.CategoryTitleWithIcon</td>
+                        <td>@transaction.Date.ToString("MM-dd-yy")</td>
+                        <td class="text-end">@transaction.FormattedAmount</td>
+                        <td>
+                            <div class="d-flex flex-row justify-content-start">
+                                <a class="btn btn-sm no-a-decoration" href="/Transaction/AddOrEdit/@transaction.TransactionId">
+                                    <i class="fa-solid fa-pen fa-lg"></i>
+                                </a>
+                                <form action="/Transaction/Delete/@transaction.TransactionId" method="post" class="ms-2">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-link no-a-decoration" onclick="return confirm('Are you sure to delete?')">
+                                        <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script id="actionColumnTemplate" type="text/x-template">
+    <div class="d-flex flex-row justify-content-start">
+        <a class="btn btn-sm no-a-decoration" href="/Transaction/AddOrEdit/${TransactionId}">
+            <i class="fa-solid fa-pen fa-lg"></i>     
+        </a>
+        <form action="/Transaction/Delete/${TransactionId}" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-sm btn-link no-a-decoration h-33" onclick="return confirm(&quot;Are you sure to delete?&quot;)">
+                <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+            </button>
+        </form>
+    </div>
+</script>

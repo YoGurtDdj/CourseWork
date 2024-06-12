@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CourseWork.Models.Report>
+
+@{
+    ViewData["Title"] = "Сохраненные отчеты";
+}
+
+<h2>Сохраненные отчеты</h2>
+<div class="widget mb-3">
+    <div class="p-4">
+        <h4 class="fw-bold">Сохраненные отчеты</h4>
+    </div>
+    <div class="px-4 pb-4">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>Дата начала</th>
+                    <th>Дата окончания</th>
+                    <th>Доход</th>
+                    <th>Расход</th>
+                    <th>Баланс</th>
+                    <th>Тип отчета</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var report in Model)
+                {
+                    <tr>
+                        <td>@report.StartDate.ToShortDateString()</td>
+                        <td>@report.EndDate.ToShortDateString()</td>
+                        <td>@report.TotalIncome.ToString("N0") ₸</td>
+                        <td>@report.TotalExpense.ToString("N0") ₸</td>
+                        <td>@report.Balance.ToString("N0") ₸</td>
+                        <td>@report.Type</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
