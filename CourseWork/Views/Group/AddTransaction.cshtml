@@ -7,9 +7,10 @@
 <div class="row">
     <div class="col-md-7">
         <div class="widget p-5">
-            <form asp-action="AddOrEdit">
+            <form asp-action="AddTransaction" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="TransactionId" />
+                <input type="hidden" asp-for="GroupId" value="@Model.GroupId" />
                 <div class="form-floating mb-3">
                     <input type="date" id="date" asp-for="Date" class="form-control custom-input" style="background-color: #12161d;" placeholder="Date" />
                     <span asp-validation-for="Date" class="text-danger"></span>
@@ -36,7 +37,3 @@
         </div>
     </div>
 </div>
-
-
-
-

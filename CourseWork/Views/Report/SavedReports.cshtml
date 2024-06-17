@@ -4,7 +4,6 @@
     ViewData["Title"] = "Сохраненные отчеты";
 }
 
-<h2>Сохраненные отчеты</h2>
 <div class="widget mb-3">
     <div class="p-4">
         <h4 class="fw-bold">Сохраненные отчеты</h4>
@@ -19,6 +18,7 @@
                     <th>Расход</th>
                     <th>Баланс</th>
                     <th>Тип отчета</th>
+                    <th>Действия</th> <!-- Добавлен столбец для действий -->
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +31,11 @@
                         <td>@report.TotalExpense.ToString("N0") ₸</td>
                         <td>@report.Balance.ToString("N0") ₸</td>
                         <td>@report.Type</td>
+                        <td>
+                            <form asp-action="DeleteReport" asp-route-id="@report.Id" method="post">
+                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                            </form>
+                        </td>
                     </tr>
                 }
             </tbody>

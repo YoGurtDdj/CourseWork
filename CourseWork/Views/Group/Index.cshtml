@@ -4,25 +4,28 @@
     ViewData["Title"] = "Моя группа";
 }
 
-<h1>Моя группа</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-success">Создать группу</a>
-</p>
+<h1 class="mb-4">Группы</h1>
 
 @if (Model != null)
 {
-    <div>
-        <h4>Название группы: @Html.DisplayFor(model => model.GroupName)</h4>
-        <h4>Баланс: @Html.DisplayFor(model => model.Balance)</h4>
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model.GroupId">Edit</a> |
-            <a asp-action="AddUserToGroup" asp-route-id="@Model.GroupId">Details</a> |
-            <a asp-action="Delete" asp-route-id="@Model.GroupId">Delete</a>
+    <div class="card text-bg-dark mb-3 custom-card">
+        <h4 class="card-header">@Html.DisplayFor(model => model.GroupName)</h4>
+        <div class="card-body">
+            <a asp-action="AddUserToGroup" asp-route-id="@Model.GroupId" class="btn btn-success">Details</a> 
         </div>
     </div>
 }
 else
 {
-    <p>Вы еще не создали группу.</p>
+    <p>Вы не состоите в группе.</p>
+    <p>
+        <a asp-action="Create" class="btn btn-success">Создать группу</a>
+    </p>
 }
+
+<style>
+    .custom-card {
+        color: #fff;
+        background-color: #222b33;
+    }
+</style>

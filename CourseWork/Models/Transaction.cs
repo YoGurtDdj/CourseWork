@@ -20,6 +20,9 @@ namespace CourseWork.Models
 
         public DateTime Date { get; set; } = DateTime.Now;
 
+        public int? GroupId { get; set; }
+        public Group? Group { get; set; }
+
         [NotMapped]
         public string? CategoryTitleWithIcon
         {

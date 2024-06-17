@@ -13,6 +13,7 @@ namespace CourseWork.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

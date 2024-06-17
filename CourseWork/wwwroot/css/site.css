@@ -230,24 +230,23 @@ nav.navbar {
 /*Radio Button Group*/
 input[type="radio"] {
     position: absolute;
-    appearance: none; /* Removes default styling */
 }
-.e-btn-group.custom-rbt-group {
+.btn-group.custom-btn-group {
     width: 100%;
 }
 
-.e-btn-group.custom-rbt-group .e-btn {
-    width: 49%;
-}
+    .btn-group.custom-btn-group .btn {
+        width: 49%;
+    }
 
-.custom-rbt-group label.e-btn {
+.custom-btn-group label.btn {
     padding: 10px 10px 10px 10px;
     box-shadow: none !important;
     background-color: rgb(34 43 51);
     color: #fff;
 }
 
-.e-btn-group.custom-rbt-group input:checked + label.e-btn {
+.btn-group.custom-btn-group input:checked + label.btn {
     background-color: #12161d;
     color: white;
 }
@@ -420,20 +419,8 @@ img.profile-pic {
 .custom-input {
     background-color: #1a222b;
     color: #fff;
-    border-radius: .3rem;
     border: none;
-    padding: 10px; /* Consistent padding */
 }
-
-    .custom-input::placeholder {
-        color: #6c757d;
-        opacity: 1;
-    }
-
-    .custom-input:focus::placeholder {
-        color: #6c757d;
-        opacity: 1;
-    }
 
     .custom-input:focus {
         color: #fff;
@@ -441,17 +428,8 @@ img.profile-pic {
         border: none;
         outline: none;
         box-shadow: none; /* Removes the default focus shadow */
-        padding: 10px !important; /* Consistent padding */
     }
 
-    .custom-input::-webkit-input-placeholder {
-        color: #6c757d;
-    }
-
-    .custom-input:not(:focus)::placeholder {
-        color: #6c757d;
-        opacity: 1;
-    }
 
 
 

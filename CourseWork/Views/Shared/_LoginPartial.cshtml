@@ -7,34 +7,33 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <nav class="navbar sticky-top mb-3">
-        <div class="container-fluid py-2 px-8 d-flex justify-content-between align-items-center">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <div class="d-flex align-items-center">
-                <i class="fa-solid fa-bell me-3"></i>
-                <i class="fa-solid fa-message me-3"></i>
-                <div class="dropdown">
-                    <button class="btn custom-btn-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class="profile-picc" src="~/profile_pic.png" />
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark custom-dropdown">
-                        <li>
-                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button id="logout" type="submit" class="dropdown-item custom-dropdown-item">Logout</button>
-                            </form>
-                        </li>
-                        <li>
-                            <a class="dropdown-item custom-dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Manage Account</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="container-fluid py-2 px-8 d-flex justify-content-between">
+            <div>
+                <a href="/Message">
+                    <i class="fa-solid fa-bell me-3"></i>
+                </a>
+            </div>
+            <div class="dropdown">
+                <button class="btn custom-btn-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="profile-picc" src="~/profile_pic.png" />
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark custom-dropdown">
+                    <li>
+                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button id="logout" type="submit" class="dropdown-item custom-dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <a class="dropdown-item custom-dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Manage Account</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 }
 else
 {
-    <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+   
 }
 
 

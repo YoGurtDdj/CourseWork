@@ -49,8 +49,7 @@ namespace CourseWork.Controllers
 
             if (reportType == "daily")
             {
-                report = new PeriodReportDecorator(_dailyReportFactory.CreateReport(), "Ежедневный отчет за последние 7 дней");
-                reportViewModel = report.Generate(selectedTransactions, startDate, endDate);
+                report = _dailyReportFactory.CreateReport();
             }
             else if (reportType == "monthly")
             {
@@ -62,14 +61,14 @@ namespace CourseWork.Controllers
                     .Where(y => y.Category.UserId == user.Id && y.Date >= startDate && y.Date <= endDate)
                     .ToListAsync();
 
-                report = new PeriodReportDecorator(_monthlyReportFactory.CreateReport(), "Ежемесячный отчет за текущий месяц");
-                reportViewModel = report.Generate(selectedTransactions, startDate, endDate);
+                report = _monthlyReportFactory.CreateReport();
             }
             else
             {
                 return BadRequest("Неизвестный тип отчета");
             }
 
+            reportViewModel = report.Generate(selectedTransactions, startDate, endDate);
             reportViewModel.ReportType = reportType;
             reportViewModel.UserId = user.Id;
 
@@ -121,7 +120,23 @@ namespace CourseWork.Controllers
 
             return View(reports);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteReport(int id)
+        {
+            var report = await _context.Reports.FindAsync(id);
+            if (report == null)
+            {
+                return NotFound();
+            }
+
+            _context.Reports.Remove(report);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(SavedReports));
+        }
     }
+
 
     public interface IReport
     {
@@ -200,51 +215,5 @@ namespace CourseWork.Controllers
             return new MonthlyReport();
         }
     }
-
-/*Декоратор*/
-    public abstract class BaseReport : IReport
-    {
-        public abstract ReportViewModel Generate(List<Transaction> transactions, DateTime startDate, DateTime endDate);
-    }
-
-    public abstract class Decorator : BaseReport
-    {
-        private readonly IReport _report;
-
-        public Decorator(IReport report)
-        {
-            _report = report;
-        }
-
-        public override ReportViewModel Generate(List<Transaction> transactions, DateTime startDate, DateTime endDate)
-        {
-            // Вызываем основной отчет
-            var baseReportViewModel = _report.Generate(transactions, startDate, endDate);
-            return baseReportViewModel;
-        }
-    }
-    public class PeriodReportDecorator : Decorator
-    {
-        private readonly IReport _report;
-        private readonly string _periodInfo;
-
-        public PeriodReportDecorator(IReport report, string periodInfo) : base(report)
-        {
-            _report = report;
-            _periodInfo = periodInfo;
-        }
-
-        public override ReportViewModel Generate(List<Transaction> transactions, DateTime startDate, DateTime endDate)
-        {
-            // Вызываем основной отчет
-            var baseReportViewModel = _report.Generate(transactions, startDate, endDate);
-
-            // Добавляем информацию о периоде
-            baseReportViewModel.PeriodInfo = _periodInfo;
-
-            return baseReportViewModel;
-        }
-    }
-
 
 }

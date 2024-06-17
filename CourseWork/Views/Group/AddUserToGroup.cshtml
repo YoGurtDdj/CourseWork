@@ -1,64 +1,190 @@
-﻿@model CourseWork.Models.Group
+﻿    @model CourseWork.Models.Group
 
-<h2>Add User to Group: @Model.GroupName</h2>
+    @{
+        var currentUser = User.Identity.Name;
+        var isCreator = Model.Users.Any(u => u.UserName == currentUser && u.IsGroupCreator);
+    }
 
-<div class="group-info">
-    <h4>Group Information</h4>
-    <p><strong>ID:</strong> @Model.GroupId</p>
-    <p><strong>Name:</strong> @Model.GroupName</p>
-    <p><strong>Balance:</strong> @Model.Balance.ToString("N0") ₸</p>
-</div>
+    <div class="group-info">
+        <h4 class="mb-3">@Model.GroupName</h4>
+        <p>@Model.Description</p>
+    </div>
 
-<div class="existing-users">
-    <h4>Existing Users in Group</h4>
-    @if (Model.Users != null && Model.Users.Any())
+    <div class="existing-users mb-3">
+        <h4 class="mb-3">Участники: </h4>
+        @if (Model.Users != null && Model.Users.Any())
+        {
+            <ul class="list-group">
+                @foreach (var user in Model.Users)
+                {
+                    <li class="list-group-item custom-list-item">
+                        @user.UserName (@user.Email)
+                        @if (user.IsGroupCreator == true)
+                        {
+                            <p class="text-muted mb-0">Creator</p>
+                        }
+                        @if (isCreator && user.IsGroupCreator == false)
+                        {
+                            <form asp-action="RemoveUserFromGroup" asp-route-id="@Model.GroupId" asp-route-userId="@user.Id" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-link no-a-decoration">
+                                    <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+                                </button>
+                            </form>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No users in this group.</p>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="widget">
+                <div class="d-flex justify-content-between p-4">
+                    <h5 style="display: inline-block;">Категории</h5>
+                    <a asp-action="AddCategory" asp-route-groupId="@Model.GroupId" class="btn btn-success">Добавит категорию</a>
+                </div>
+                <div class="px-4 pb-4">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Categories != null)
+                            {
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <tr>
+                                        <td>@category.TitleWithIcon</td>
+                                        <td>
+                                            @if (category.Type == "Income")
+                                            {
+                                                <span class="badge bg-success">@category.Type</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger">@category.Type</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="d-flex flex-row justify-content-start">
+                                                <a class="btn btn-sm no-a-decoration" asp-action="AddCategory" asp-route-groupId="@Model.GroupId" asp-route-categoryId="@category.CategoryId">
+                                                    <i class="fa-solid fa-pen fa-lg"></i>
+                                                </a>
+                                            <form asp-action="DeleteCategory" method="post">
+                                                @Html.AntiForgeryToken()
+
+                                                <input type="hidden" name="groupId" value="@Model.GroupId" />
+                                                <input type="hidden" name="categoryId" value="@category.CategoryId" />
+
+                                                <div class="d-flex flex-row justify-content-start">
+                                                    <button type="submit" class="btn btn-sm btn-link no-a-decoration" onclick="return confirm('Are you sure to delete?')">
+                                                        <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="widget">
+                <div class="d-flex justify-content-between p-4">
+                    <h5 style="display: inline-block;">Транзакции</h5>
+                    <a asp-action="AddTransaction" asp-route-groupId="@Model.GroupId" class="btn btn-success">Добавит транзакцию</a>
+                </div>
+                <div class="px-4 pb-4">
+                    <table class="table custom-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(Model.Transactions != null){
+                            @foreach (var transaction in Model.Transactions)
+                            {
+                                <tr>
+                                    <td>@transaction.CategoryTitleWithIcon</td>
+                                    <td>@transaction.Date.ToString("MM-dd-yy")</td>
+                                    <td class="text-end">@transaction.FormattedAmount</td>
+                                    <td>
+                                        <div class="d-flex flex-row justify-content-start">
+                                            <a class="btn btn-sm no-a-decoration" href="/Transaction/AddOrEdit/@transaction.TransactionId">
+                                                <i class="fa-solid fa-pen fa-lg"></i>
+                                            </a>
+                                            <form asp-action="DeleteTransaction" method="post" class="ms-2">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="groupId" value="@Model.GroupId" />
+                                                <input type="hidden" name="transactionId" value="@transaction.TransactionId" />
+                                                <button type="submit" class="btn btn-sm btn-link no-a-decoration" onclick="return confirm('Are you sure to delete?')">
+                                                    <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+                                                </button>
+                                            </form>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (isCreator)
     {
-        <ul class="list-group">
-            @foreach (var user in Model.Users)
+        <a asp-action="Edit" class="btn btn-secondary mb-3" asp-route-id="@Model.GroupId">Edit</a>
+        <a asp-action="Delete" class="btn btn-danger mb-3" asp-route-id="@Model.GroupId">Delete</a>
+        <div class="form-group">
+            <h4 for="userId" class="mb-3">Возможные участники:</h4>
+            @foreach (var user in ViewBag.UsersNotInGroup)
             {
-                <li class="list-group-item">
-                    @user.UserName (@user.Email)
-                </li>
+                <div class="card" style="color: #fff;background-color: #222b33; padding: 15px;">
+                    <p style="font-size:20px; margin-bottom: 2px;">@user.Email</p>
+                    <hr style="margin:5px;" />
+                    <form asp-action="AddUserToGroup" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@Model.GroupId" />
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-success">Add User</button>
+                    </form>
+                </div>
             }
-        </ul>
+        </div>
     }
     else
     {
-        <p>No users in this group.</p>
-    }
-</div>
-
-<form asp-action="AddUserToGroup" asp-route-id="@Model.GroupId">
-    <div class="form-group">
-        <label for="userId">Select User:</label>
-        <select class="form-control" name="userId">
-            @foreach (var user in ViewBag.UsersNotInGroup)
-            {
-                <option value="@user.Value">@user.Text</option>
-            }
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Add User</button>
-</form>
-<style>
-    .group-info, .existing-users {
-        margin-bottom: 20px;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
+        <form asp-action="LeaveGroup" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger">Leave Group</button>
+        </form>
     }
 
-    .form-group {
-        margin-top: 20px;
-    }
-
-    .btn-primary {
-        margin-top: 10px;
-    }
-
-    .list-group-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-</style>
+    <style>
+        .custom-list-item {
+            background-color: #222b33;
+            color: #fff;
+        }
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>

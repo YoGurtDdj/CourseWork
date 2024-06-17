@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CourseWork.Models.Message>
+
+@{
+    ViewData["Title"] = "Messages";
+}
+
+<h2 class="mb-4">Messages</h2>
+
+@foreach(var item in Model)
+{
+    <div class="card mb-3" style="color: #fff;background-color: #1a222b;">
+        <div class="card-header">
+            Сообщение
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Для: @Html.DisplayFor(modelItem => item.User.UserName)</h5>
+            <p class="card-text">@Html.DisplayFor(modelItem => item.MessageText)</p>
+        </div>
+        <div class="card-footer text-body-secondary">
+            @Html.DisplayFor(modelItem => item.Date)
+        </div>
+    </div>
+}
+

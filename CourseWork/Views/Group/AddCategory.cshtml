@@ -7,10 +7,10 @@
 <div class="row">
     <div class="col-md-7">
         <div class="widget p-5">
-            <form asp-action="AddOrEdit">
+            <form asp-action="AddCategory" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="CategoryId" />
-                <input type="hidden" asp-for="UserId" />
+                <input type="hidden" asp-for="GroupId" value="@Model.GroupId" />
                 <div class="btn-group mb-3 custom-btn-group">
                     <input class="btn-check" type="radio" id="radioleft" asp-for="Type" value="Expense" checked="@(Model.Type == "Expense")" />
                     <label class="btn btn-outline-secondary" for="radioleft">Expense</label>

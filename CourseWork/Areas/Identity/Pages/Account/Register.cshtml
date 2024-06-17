@@ -12,16 +12,19 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control custom-input" autocomplete="username" aria-required="true" placeholder="Email" />
+                <input asp-for="Input.Email" id="floatingEmail" class="form-control custom-input" autocomplete="username" aria-required="true" placeholder="Email" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <label for="floatingEmail" style="color: #6c757d;">Email</label>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control custom-input" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                <input asp-for="Input.Password" id="floatingPassword" class="form-control custom-input" autocomplete="new-password" aria-required="true" placeholder="Password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <label for="floatingPassword" style="color: #6c757d;">Password</label>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control custom-input" autocomplete="new-password" aria-required="true" placeholder="Confirm password" />
+                <input asp-for="Input.ConfirmPassword" id="floatingRepeatPassword" class="form-control custom-input" autocomplete="new-password" aria-required="true" placeholder="Confirm password" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                <label for="floatingRepeatPassword" style="color: #6c757d;">Password</label>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-success">Register</button>
         </form>

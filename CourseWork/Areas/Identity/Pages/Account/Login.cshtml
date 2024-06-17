@@ -14,12 +14,14 @@
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control custom-input" placeholder="Email"/>
+                    <input asp-for="Input.Email" class="form-control custom-input" id="floatingEmail" placeholder="Email" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <label for="floatingEmail" style="color: #6c757d;">Email</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control custom-input" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                    <input asp-for="Input.Password" class="form-control custom-input" id="floatingPassword" autocomplete="current-password" aria-required="true" placeholder="Password" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <label for="floatingPassword" style="color: #6c757d;">Password</label>
                 </div>
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-success">Log in</button>
